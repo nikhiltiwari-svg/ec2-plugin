@@ -35,6 +35,7 @@ import hudson.plugins.ec2.util.KeyHelper;
 import java.io.File;
 import java.io.IOException;
 import java.security.PublicKey;
+import java.util.Collections;
 import java.util.Map;
 import java.util.WeakHashMap;
 import jenkins.model.Jenkins;
@@ -54,7 +55,7 @@ public final class HostKeyHelper {
 
     private static final HostKeyHelper INSTANCE = new HostKeyHelper();
 
-    private final Map<Computer, HostKey> cache = new WeakHashMap<>();
+    private final Map<Computer, HostKey> cache = Collections.synchronizedMap(new WeakHashMap<>());
 
     private HostKeyHelper() {
         super();
